@@ -35,7 +35,7 @@ const zh = {
     eyebrow: 'Jiran · 为 AI 编程工具而作的本地计量仪',
     title: '计然',
     lead:
-      'Token 从五十九处源头涌来。计然在你自己的机器上把它们一一计入——用了多少，额度还剩多少，实际花了多少钱。',
+      'Token 从五十九处源头涌来。计然在你自己的机器上把它们一一计入：用了多少，额度还剩多少，实际花了多少钱。',
     ctaPrimary: '下载',
     ctaAll: '全部平台',
     ctaSource: '源代码',
@@ -65,7 +65,7 @@ const zh = {
   },
   questions: {
     kicker: '问',
-    title: '三个数字，从你自己的磁盘里读出来',
+    title: '三个数字，从你自己的\u200b磁盘里读出来', // \u200b：keep-all 下的断行点
     intro:
       '每个被跟踪的工具都在本机留下 transcript、会话数据库或缓存。计然读的就是这些——数据本来就在你的磁盘上，计量也就在这里完成。',
     sample: '示意数据',
@@ -230,7 +230,7 @@ const zh = {
       config: '配置',
       api: 'API',
     },
-    credits: 'Token 计量基于 tokscale。产品以 MIT 许可开源。',
+    credits: 'Token 计量基于 {tokscale}。产品以 {MIT} 许可开源。',
     site: '本站不使用 Cookie 与统计脚本。',
   },
   notFound: { title: '这一页没有被计入', body: '链接可能已失效。', back: '回到首页' },
@@ -451,7 +451,7 @@ const en: Content = {
       config: 'Configuration',
       api: 'API',
     },
-    credits: 'Token accounting runs on tokscale. The product is open source under MIT.',
+    credits: 'Token accounting runs on {tokscale}. The product is open source under {MIT}.',
     site: 'This site sets no cookies and runs no analytics.',
   },
   notFound: { title: 'This page was never counted', body: 'The link may be out of date.', back: 'Back to the start' },

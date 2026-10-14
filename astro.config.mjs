@@ -9,7 +9,7 @@ export default defineConfig({
   site,
   output: 'static',
   trailingSlash: 'always',
-  build: { format: 'directory', inlineStylesheets: 'auto' },
+  build: { format: 'directory', inlineStylesheets: 'never' },
   devToolbar: { enabled: false },
   vite: {
     build: { assetsInlineLimit: 2048 },

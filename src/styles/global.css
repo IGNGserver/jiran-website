@@ -136,6 +136,16 @@ button {
   color: inherit;
 }
 
+code,
+pre,
+kbd {
+  font-family: var(--f-mono);
+}
+
+[hidden] {
+  display: none !important;
+}
+
 .sr-only {
   position: absolute;
   width: 1px;
@@ -172,7 +182,7 @@ button {
 
 .section {
   position: relative;
-  padding-block: clamp(96px, 14vw, 200px);
+  padding-block: clamp(88px, 11vw, 168px);
   border-top: 1px solid var(--line);
 }
 
@@ -228,6 +238,16 @@ button {
   max-width: 14em;
 }
 
+/* 中文标题与导语只在标点处断行，避免把一个词拆到两行（窄屏仍允许任意断行） */
+:lang(zh) .h2 {
+  word-break: keep-all;
+}
+@media (min-width: 700px) {
+  :lang(zh) .lead {
+    word-break: keep-all;
+  }
+}
+
 .lead {
   font-size: var(--t-lead);
   line-height: 1.6;
@@ -241,7 +261,6 @@ button {
   font-size: var(--t-micro);
   letter-spacing: 0.08em;
   color: var(--bone-faint);
-  text-transform: uppercase;
 }
 
 /* ---------------------------------------------------------------- buttons */

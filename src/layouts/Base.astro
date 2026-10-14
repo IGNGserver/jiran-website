@@ -15,7 +15,7 @@ const pageTitle = title ?? t.meta.title;
 const pageDesc = description ?? t.meta.description;
 const site = Astro.site;
 const abs = (path: string) => (site ? new URL(path, site).href : path);
-const ogImage = abs(`/og/og-${lang}.png`);
+const ogImage = abs(`/og/og-${lang}.jpg`);
 ---
 
 <!doctype html>
