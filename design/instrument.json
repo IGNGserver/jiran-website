@@ -1,0 +1,28 @@
+{
+  "$comment": "计然「算仪」的唯一几何与配色定义。Blender 构建脚本（design/blender/build_instrument.py）与站点 Three.js 场景（src/scripts/hero/）都读这一份；改这里，两边一起变。单位：米 / 度。",
+  "palette": {
+    "ink": "#09090a",
+    "ink2": "#111113",
+    "bone": "#ece6da",
+    "boneDim": "#9b9488",
+    "cinnabar": "#e5432a",
+    "cinnabarDeep": "#9f2716",
+    "brass": "#b8955a",
+    "jade": "#8fc7b2"
+  },
+  "core": { "radius": 0.36 },
+  "bead": { "radius": 0.075, "height": 0.1, "hole": 0.016 },
+  "rings": [
+    { "id": "ecliptic", "radius": 2.0, "tube": 0.011, "tilt": [0, 0, 0], "ticks": 59, "beads": 13, "spin": 0.018 },
+    { "id": "meridian", "radius": 1.6, "tube": 0.008, "tilt": [64, 0, 16], "ticks": 24, "beads": 5, "spin": -0.031 },
+    { "id": "equator", "radius": 1.22, "tube": 0.007, "tilt": [-36, 0, -42], "ticks": 12, "beads": 3, "spin": 0.047 }
+  ],
+  "flow": {
+    "sources": 59,
+    "outerRadius": 6.4,
+    "countRadius": 2.0,
+    "coreRadius": 0.42,
+    "twist": 1.2,
+    "thickness": 0.22
+  }
+}
