@@ -14,10 +14,10 @@
 | --- | --- |
 | `src/pages/` | 路由：`/`（中文）、`/en/`、`404` |
 | `src/components/` | 首屏与七个章节组件 |
-| `src/scripts/hero/` | 首屏「算仪」实时场景（three.js、着色器） |
+| `src/scripts/hero/` | 首屏「刻漏」实时场景（three.js、水面着色器）；静帧也由它渲染 |
 | `src/i18n/content.ts` | 中英文案 |
 | `src/data/product.ts` | 引用的产品事实（支持矩阵、计数、链接），注明核对基线 |
-| `design/` | 设计说明、共享几何 spec、Blender 构建脚本与 .blend、图片生成脚本 |
+| `design/` | 设计说明、共享几何与配色 spec（`kelou.json`）、静帧与图片生成脚本 |
 | `tests/` | Playwright 端到端检查与事实一致性测试 |
 | [`docs/SITE.md`](docs/SITE.md) | 官网定位、范围、已定案事项与待办 |
 | [`docs/HOSTING.md`](docs/HOSTING.md) | Cloudflare 托管方案、构建参数与上线检查清单 |

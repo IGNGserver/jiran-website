@@ -63,18 +63,18 @@ const t = CONTENT[lang].privacy;
     flex: none;
     width: 9px;
     height: 9px;
-    border: 1px solid var(--bone-dim);
+    border: 1px solid var(--fg-dim);
   }
   .membrane__stays li {
-    color: var(--bone);
+    color: var(--fg);
   }
   .membrane__crosses li {
-    color: var(--bone-dim);
+    color: var(--fg-dim);
   }
   .membrane__arrow {
     flex: none;
     font-family: var(--f-mono);
-    color: var(--cinnabar);
+    color: var(--celadon);
     transition: transform 0.8s var(--ease-out);
     transition-delay: calc(var(--i) * 80ms + 0.3s);
     transform: translateX(-60px);
@@ -94,7 +94,7 @@ const t = CONTENT[lang].privacy;
     content: '';
     width: 1px;
     height: 100%;
-    background: repeating-linear-gradient(180deg, var(--bone-dim) 0 2px, transparent 2px 7px);
+    background: repeating-linear-gradient(180deg, var(--fg-dim) 0 2px, transparent 2px 7px);
   }
   .membrane__label {
     position: absolute;
@@ -102,11 +102,11 @@ const t = CONTENT[lang].privacy;
     left: 50%;
     transform: translate(-50%, -50%) rotate(-90deg);
     padding: 6px 12px;
-    background: var(--ink);
+    background: var(--bg);
     font-size: var(--t-micro);
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--bone-dim);
+    color: var(--fg-dim);
     white-space: nowrap;
   }
   .privacy__foot {
@@ -121,7 +121,7 @@ const t = CONTENT[lang].privacy;
     border-left: 2px solid var(--cinnabar);
   }
   .privacy__foot p {
-    color: var(--bone-dim);
+    color: var(--fg-dim);
     max-width: 52em;
   }
   .privacy__foot a {
@@ -140,7 +140,7 @@ const t = CONTENT[lang].privacy;
     .membrane__wall::before {
       width: 100%;
       height: 1px;
-      background: repeating-linear-gradient(90deg, var(--bone-dim) 0 2px, transparent 2px 7px);
+      background: repeating-linear-gradient(90deg, var(--fg-dim) 0 2px, transparent 2px 7px);
     }
     .membrane__label {
       transform: translate(-50%, -50%);

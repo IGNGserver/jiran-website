@@ -1,6 +1,6 @@
 /* 计然官网 · 全局样式
- * 设计语言见 design/DESIGN.md：墨（底）、骨白（字）、朱砂（被计入的那一刻）、黄铜（刻度与细线）。
- * 颜色与 design/instrument.json 的 palette 一致。
+ * 设计语言见 design/DESIGN.md「刻漏」：宣纸（底）、墨（字）、青瓷（水与器物）、黛（刻度与细线）、
+ * 朱砂只作「印」——当前读数与品牌印记。颜色与 design/kelou.json 的 palette 一致。
  */
 
 @import '@fontsource/instrument-serif/400.css';
@@ -11,20 +11,22 @@
 @import '@fontsource/noto-serif-sc/600.css';
 
 :root {
-  color-scheme: dark;
+  color-scheme: light;
 
-  --ink: #09090a;
-  --ink-2: #0f0f11;
-  --ink-3: #17171a;
-  --bone: #ece6da;
-  --bone-dim: #a39c90;
-  --bone-faint: #6f6a61;
-  --cinnabar: #e5432a;
-  --cinnabar-deep: #9f2716;
-  --brass: #b8955a;
-  --jade: #8fc7b2;
-  --line: rgb(236 230 218 / 0.1);
-  --line-2: rgb(236 230 218 / 0.2);
+  --bg: #f2ede3;
+  --bg-2: #ebe5d8;
+  --bg-3: #e2dacb;
+  --fg: #1f1e1c;
+  --fg-dim: #57534b;
+  --fg-faint: #78726a;
+  --cinnabar: #c3402b;
+  --cinnabar-deep: #9a2f1f;
+  --rule: #a8834a;
+  --celadon: #4f7a6e;
+  --celadon-soft: #a9c1b5;
+  --dai: #3b4a55;
+  --line: rgb(31 30 28 / 0.12);
+  --line-2: rgb(31 30 28 / 0.24);
 
   --f-display: 'Instrument Serif', 'Noto Serif SC', 'Songti SC', 'STSong', serif;
   --f-sans: 'Instrument Sans Variable', 'PingFang SC', 'Hiragino Sans GB', 'Noto Sans CJK SC',
@@ -62,8 +64,8 @@ html {
 
 body {
   margin: 0;
-  background: var(--ink);
-  color: var(--bone);
+  background: var(--bg);
+  color: var(--fg);
   font-family: var(--f-sans);
   font-size: var(--t-body);
   line-height: 1.65;
@@ -73,14 +75,15 @@ body {
   overflow-x: clip;
 }
 
-/* 纸面颗粒：极轻的胶片噪点，让纯色墨底有「物质感」 */
+/* 纸面颗粒：极轻的纤维噪点，让纯色纸底有「物质感」 */
 body::after {
   content: '';
   position: fixed;
   inset: -50%;
   z-index: 100;
   pointer-events: none;
-  opacity: 0.05;
+  opacity: 0.07;
+  mix-blend-mode: multiply;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
@@ -99,7 +102,7 @@ a {
   transition: color 0.2s, text-decoration-color 0.2s;
 }
 a:hover {
-  color: var(--bone);
+  color: var(--fg);
   text-decoration-color: var(--cinnabar);
 }
 
@@ -111,7 +114,7 @@ a:hover {
 
 ::selection {
   background: var(--cinnabar);
-  color: var(--ink);
+  color: var(--bg);
 }
 
 h1,
@@ -162,8 +165,8 @@ kbd {
   left: 8px;
   z-index: 200;
   padding: 8px 14px;
-  background: var(--bone);
-  color: var(--ink);
+  background: var(--fg);
+  color: var(--bg);
   transform: translateY(-200%);
   transition: transform 0.2s;
 }
@@ -205,7 +208,7 @@ kbd {
   font-size: var(--t-micro);
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--bone-dim);
+  color: var(--fg-dim);
 }
 .kicker__numeral {
   font-family: var(--f-display);
@@ -251,7 +254,7 @@ kbd {
 .lead {
   font-size: var(--t-lead);
   line-height: 1.6;
-  color: var(--bone-dim);
+  color: var(--fg-dim);
   max-width: 40em;
   text-wrap: pretty;
 }
@@ -260,7 +263,7 @@ kbd {
   font-family: var(--f-mono);
   font-size: var(--t-micro);
   letter-spacing: 0.08em;
-  color: var(--bone-faint);
+  color: var(--fg-faint);
 }
 
 /* ---------------------------------------------------------------- buttons */
@@ -279,24 +282,24 @@ kbd {
   font-weight: 500;
   text-decoration: none;
   white-space: nowrap;
-  background: rgb(9 9 10 / 0.4);
+  background: rgb(242 237 227 / 0.55);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   transition: border-color 0.3s, background 0.3s, color 0.3s, transform 0.3s var(--ease-out);
 }
 .btn:hover {
-  border-color: var(--bone);
+  border-color: var(--fg);
   transform: translateY(-1px);
 }
 .btn--primary {
-  background: var(--bone);
-  color: var(--ink);
-  border-color: var(--bone);
+  background: var(--fg);
+  color: var(--bg);
+  border-color: var(--fg);
 }
 .btn--primary:hover {
   background: var(--cinnabar);
   border-color: var(--cinnabar);
-  color: var(--ink);
+  color: var(--bg);
 }
 .btn__meta {
   font-family: var(--f-mono);

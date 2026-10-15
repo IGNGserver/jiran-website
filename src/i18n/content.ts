@@ -22,7 +22,7 @@ const zh = {
     title: '计然 · 本地优先的 AI 编程工具 Token、成本与额度计量',
     description:
       '计然把你已经在用的 59 个 AI 编程工具与供应商的 Token 用量、花费与订阅额度，先在本机算清楚；多台设备可汇聚到你自己部署的 Hub。无遥测，开源（MIT）。',
-    ogAlt: '计然的「算仪」：五十九道 Token 流汇入三重浑仪环与朱砂算珠',
+    ogAlt: '计然的「刻漏」：五十九处来源的水滴，经三只青瓷壶一滴一滴计入',
   },
   nav: {
     skip: '跳到正文',
@@ -34,8 +34,9 @@ const zh = {
   hero: {
     eyebrow: 'Jiran · 为 AI 编程工具而作的本地计量仪',
     title: '计然',
+    motto: '点滴有数',
     lead:
-      'Token 从五十九处源头涌来。计然在你自己的机器上把它们一一计入：用了多少，额度还剩多少，实际花了多少钱。',
+      '每个 Token 都是一滴水，从五十九处源头落下。计然在你自己的机器上把它们一滴一滴计入：用了多少，额度还剩多少，实际花了多少钱。',
     ctaPrimary: '下载',
     ctaAll: '全部平台',
     ctaSource: '源代码',
@@ -49,19 +50,20 @@ const zh = {
     counterUnit: 'tokens',
     counterNote: '演示数据——所以带「~」',
     focusLabel: '来源',
+    creditsLabel: 'credits · 单独计量，不并入 Token',
     scroll: '向下',
-    posterAlt: '计然「算仪」：墨色核心、三重浑仪环、朱砂算珠，Token 流从外缘螺旋汇入',
+    posterAlt: '计然「刻漏」：五十九处来源的水滴落入青瓷源壶，经平水壶匀成一滴一滴，落进受水壶；浮箭的刻度随计入的 Token 上升，经过朱砂指针',
   },
   name: {
     kicker: '名',
-    title: '既算支出，也算收入',
+    title: '计之，然后了然',
     body: [
-      '计然是《史记·货殖列传》里那位善于「计」的谋士。两个字，就是这个产品的全部范围：AI 工具烧掉了多少 Token，这些订阅与调用实际花了你多少钱。',
+      '计然是《史记·货殖列传》里那位善于「计」的谋士。这两个字也可以读成一句话：计之，然后了然——AI 工具烧掉了多少 Token，这些订阅与调用实际花了你多少钱，一滴一滴算过，心里就有数。',
       '它在 v0.47.0-rev.36 之前叫 Token Monitor。改名不是重置：旧的用户数据目录会在首次启动时被复制过来，旧环境变量与请求头继续有效。',
     ],
-    quote: '知斗则修备，时用则知物，二者形则万货之情可得而观已。',
+    quote: '论其有余不足，则知贵贱。',
     quoteSource: '《史记·货殖列传》引计然语',
-    imageAlt: '算珠特写：骨白的 Token 在算珠一侧，越过刻度后变为朱砂色',
+    imageAlt: '浮箭特写：刻着汉字序数的竹片从水中升起，经过一根朱砂指针',
   },
   questions: {
     kicker: '问',
@@ -243,7 +245,7 @@ const en: Content = {
     title: 'Jiran · Local-first token, cost and quota metering for AI coding tools',
     description:
       'Jiran reads token usage, cost and plan quotas for 59 AI coding tools and providers from your own disk, and can gather several machines into a Hub you run yourself. No telemetry. Open source (MIT).',
-    ogAlt: 'The Jiran instrument: fifty-nine streams of tokens converging on three armillary rings and cinnabar abacus beads',
+    ogAlt: 'The Jiran clepsydra: drops from fifty-nine sources counted, one by one, through three celadon vessels',
   },
   nav: {
     skip: 'Skip to content',
@@ -255,8 +257,9 @@ const en: Content = {
   hero: {
     eyebrow: '计然 · A local meter for AI coding tools',
     title: 'Jiran',
+    motto: 'Every drop, counted.',
     lead:
-      'Tokens pour in from fifty-nine sources. Jiran counts every one of them on your own machine — what you used, what is left of your plan, and what it actually cost.',
+      'Every token is a drop, and they fall from fifty-nine sources. Jiran counts them drop by drop on your own machine — what you used, what is left of your plan, and what it actually cost.',
     ctaPrimary: 'Download',
     ctaAll: 'All platforms',
     ctaSource: 'Source',
@@ -270,19 +273,20 @@ const en: Content = {
     counterUnit: 'tokens',
     counterNote: 'demo figure — hence the “~”',
     focusLabel: 'source',
+    creditsLabel: 'credits · kept apart from tokens',
     scroll: 'Scroll',
-    posterAlt: 'The Jiran instrument: an ink core, three armillary rings and cinnabar beads, with token streams spiralling in from the edge',
+    posterAlt: 'The Jiran clepsydra: drops from fifty-nine sources fall into a celadon basin, are evened out by a regulating vessel and drip into the receiving vessel, where a graduated float rod rises past a cinnabar pointer as tokens are counted',
   },
   name: {
     kicker: 'Name',
-    title: 'Count what burns, and what it costs',
+    title: 'Count it, and it comes clear',
     body: [
-      '计然 (Jīrán) is the strategist in the Records of the Grand Historian credited with counting both what a state burned and what it earned. That is the whole product in two words: the tokens your AI tools spent, and what those plans actually cost you.',
+      '计然 (Jīrán) is the strategist in the Records of the Grand Historian remembered for keeping count. The two characters also read as a sentence — count it, and it comes clear: the tokens your AI tools spent and what those plans actually cost you, tallied drop by drop until you know.',
       'It shipped as Token Monitor up to v0.47.0-rev.36. The rename is not a reset: the old user-data folder is copied over on first launch, and the old environment variables and headers keep working.',
     ],
-    quote: 'Know when to fight and you prepare; know the season and you know the goods. See both, and the nature of all ten thousand goods lies open.',
+    quote: 'Weigh what is in surplus and what falls short, and you will know what is dear and what is cheap.',
     quoteSource: 'Jiran, as quoted in Shiji · Biographies of the Money-makers',
-    imageAlt: 'Close-up of the abacus beads: bone-white tokens on one side turn cinnabar once they pass the mark',
+    imageAlt: 'Close-up of the float rod: a bamboo slip marked with Chinese numerals rises from the water past a cinnabar pointer',
   },
   questions: {
     kicker: 'Ask',
