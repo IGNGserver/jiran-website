@@ -90,14 +90,16 @@ jobs:
         env:
           ASTRO_TELEMETRY_DISABLED: '1'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Current Cloudflare Pages default hostname; replace when a custom domain is selected.
+          SITE_URL: https://jiran-website.pages.dev/
       - name: End-to-end tests
         if: steps.changes.outputs.site == 'true'
         run: pnpm test
         env:
           ASTRO_TELEMETRY_DISABLED: '1'
 
-      # Direct Upload fallback: retain the production build for a one-off
-      # deployment while the Pages GitHub installation is repaired.
+      # Direct Upload path: retain the production build for manual Cloudflare
+      # deployment until a controlled continuous publishing workflow is configured.
       - name: Upload production site artifact
         if: steps.changes.outputs.site == 'true' && github.event_name == 'workflow_dispatch' && github.ref == 'refs/heads/main'
         uses: actions/upload-artifact@v4
