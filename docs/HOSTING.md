@@ -1,51 +1,69 @@
-# 托管方案（Cloudflare）
+# 托管方案（Cloudflare Pages）
 
-> 目标：站点以 Cloudflare 托管（Pages / Workers 静态资源二选一，未定案）。本文记录方案边界、
-> 已具备的前提与上线检查清单；**清单未完成不得上线**。
+> 目标：站点以 Cloudflare Pages 托管。当前已完成首版 Direct Upload 部署；正式自定义域名仍未选定，不能把 `pages.dev` 地址当作最终品牌域名。
 
-## 已确认的前提（2026-10-13 核实）
+## 已确认的前提（2026-10-15 核实）
 
-- Cloudflare 账号已就绪，zone 与 Pages/Workers 均可用；
-- 本仓库为独立公开仓库，CI 走 GitHub Actions；
-- 本项目对应的 Pages/Workers 项目尚未创建，域名与子域未选定。
+- Cloudflare 账号已就绪，Pages 可用；
+- 本仓库为独立公开仓库，构建与测试走 GitHub Actions；
+- Cloudflare Pages 项目 `jiran-website` 已创建，采用 **Direct Upload**；
+- 当前可访问地址为 `https://jiran-website.pages.dev/`，这是 Cloudflare 分配的默认地址；尚未绑定自定义 zone 或正式域名；
+- `main` 合并不会自动触发生产发布，当前由 GitHub Actions 生成短期构建产物，再执行 Direct Upload。
 
 ## 构建产物（2026-10-15 定案）
 
-站点是纯静态输出，三种方案都适用；没有边缘逻辑需求，**倾向 Cloudflare Pages（Git 集成）**，最终以创建项目时的决定为准。
+站点是纯静态输出，没有边缘逻辑需求；生产构建在 GitHub Actions 执行，避免在 NAS 项目卷上安装依赖或生成产物。
 
 | 项 | 值 |
 | --- | --- |
 | 安装 | `pnpm install --frozen-lockfile`（Node.js 22.13+，`packageManager: pnpm@10.33.0`） |
 | 构建命令 | `pnpm build`（`astro check && astro build`） |
 | 输出目录 | `dist/`（含 `404.html`，Pages 会自动作为 404 页） |
-| 环境变量 | `SITE_URL`：正式域名（如 `https://<域名>/`），用于 canonical / hreflang / og:image 绝对地址；未设置时这些标签退化为相对地址 |
+| 当前 `SITE_URL` | `https://jiran-website.pages.dev/`；选定正式域名后必须同步修改 CI 与 Pages 配置 |
 | 可选环境变量 | `GITHUB_TOKEN`：构建时读取发布信息，避开匿名限流；`JIRAN_OFFLINE=1`：离线构建，下载链接退回 Releases 页面 |
 
 注意：版本号与下载直链在**构建时**烘焙，浏览器端会再向 GitHub 刷新一次；产品发版后不重新部署也能显示新版本，
 但无 JS 或 GitHub 限流时显示的是上次构建时的版本。
 
-## 候选方案（实现时二选一）
+## 托管方案决策
 
-| 方案 | 说明 | 何时适用 |
+| 方案 | 状态 | 说明 |
 | --- | --- | --- |
-| Cloudflare Pages（Git 集成） | 连接本仓库，push / PR 自动构建与预览 | 静态输出，希望 PR 预览部署 |
-| Cloudflare Pages（Direct Upload） | CI 构建后 `wrangler pages deploy` 上传 | 需要构建缓存或自定义流水线 |
-| Workers 静态资源 | `wrangler deploy` 发布 assets | 需要边缘逻辑（重定向、API 代理等）时 |
+| Cloudflare Pages（Direct Upload） | **当前方案** | GitHub Actions 构建 `dist/`，再上传到 Pages；适合当前已有的 CI 构建与测试流程 |
+| Cloudflare Pages（Git 集成） | 未采用 | 当前账号的 GitHub 安装无法完成项目创建；Direct Upload 项目也不能直接转换为 Git 集成项目 |
+| Workers 静态资源 | 未采用 | 当前没有边缘逻辑需求 |
 
-决策点：是否需要边缘逻辑、构建时长与缓存、预览部署方式。
+如果以后需要 Cloudflare 原生的 push / PR 预览，应新建 Git 集成项目，不要在现有 Direct Upload 项目上猜测迁移。
 
-## 上线检查清单（后续任务执行）
+## 当前项目配置
+
+| 项 | 值 |
+| --- | --- |
+| Pages 项目 | `jiran-website` |
+| 部署类型 | Direct Upload |
+| 生产分支元数据 | `main` |
+| 构建命令记录 | `pnpm build` |
+| 构建输出记录 | `dist/` |
+| 默认公开地址 | `https://jiran-website.pages.dev/` |
+| 自定义域名 | 尚未配置 |
+
+Direct Upload 不由 Cloudflare 重新执行仓库构建；真正上传的是 GitHub Actions 生成的 `dist/`。当前 CI 仅在手动触发 `main` 工作流时保留一个 1 天的构建 artifact，未配置长期 Cloudflare API 凭据或自动生产发布工作流。
+
+## 上线检查清单
 
 - [x] 前端技术栈与构建命令定案，登记到 `AGENTS.md` 并接入 CI（2026-10-15）；
-- [ ] 创建 Cloudflare 项目（建议名 `jiran-website`，与仓库同名），确定 Pages / Workers；
-- [ ] 选定 zone 与子域（候选：`igng.net` 子域或独立域名），配置自定义域并验证 HTTPS；
-- [ ] 若走 CI 上传：在 GitHub 仓库 Secrets 配置 `CLOUDFLARE_API_TOKEN`（最小权限：仅目标账户 Pages/Workers 编辑）与 `CLOUDFLARE_ACCOUNT_ID`；凭据不得提交；
-- [ ] 部署工作流：PR 预览 + `main` 合并后自动发布（或手动发布），并记录回滚方式；
-- [ ] 构建环境变量 `SITE_URL` 设为正式域名；
-- [ ] 上线后验证：`/` 与 `/en/` 200、未知路径返回 404 页、HTTPS 证书、社交卡片（og:image 绝对地址）、产品仓库链接、下载直链；
-- [ ] 评估是否将产品仓库 `homepageUrl`（当前指向 GitHub Pages）改为官网域名。
+- [x] 创建 Cloudflare Pages 项目 `jiran-website`，选择 Direct Upload（2026-10-15）；
+- [x] 首次生产部署完成，并验证默认 Pages 地址的 HTTPS；
+- [x] 验证 `/` 与 `/en/` 返回 200、未知路径返回 404；
+- [x] CI 构建注入当前默认地址 `SITE_URL`，使 canonical / hreflang / og:image 生成绝对地址；
+- [ ] 选定正式 zone 与自定义域名，配置 DNS、HTTPS，并重新部署；
+- [ ] 若改为持续自动发布，配置最小权限的 `CLOUDFLARE_API_TOKEN` 与 `CLOUDFLARE_ACCOUNT_ID`；凭据不得提交；
+- [ ] 选定正式域名后更新 `SITE_URL`，并重新验证 SEO 社交卡片、产品仓库链接与下载直链；
+- [ ] 评估是否将产品仓库 `homepageUrl`（当前指向 GitHub Pages）改为正式官网域名。
 
-## 回滚
+## 发布与回滚
 
-- Pages / Workers：在 Cloudflare 控制台回滚到上一个部署版本，或按对应 CLI 的 rollback 命令处理；
-- 域名变更：修改 DNS 记录前记录原值，回滚即恢复原记录。
+- 生产发布：在 GitHub Actions 手动触发 `Jiran website checks` 的 `main` 工作流，下载 `site-dist-<commit-sha>` artifact，再通过 Cloudflare Pages Direct Upload 发布；构建与 artifact 只能放在 CI 或本机 scratch，不得写回项目卷；
+- 当前公开入口：<https://jiran-website.pages.dev/>；
+- 回滚：在 Cloudflare Pages 项目中选择上一成功部署版本恢复。发布前记录部署 ID 与对应的 `main` 提交；
+- 域名变更：修改 DNS 前记录原值，回滚即恢复原记录；正式域名尚未确定前不要创建 DNS 记录。
