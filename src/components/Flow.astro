@@ -84,7 +84,7 @@ const d = t.diagram;
     gap: 8px;
     padding: 22px;
     border: 1px solid var(--line-2);
-    background: var(--ink-2);
+    background: var(--bg-2);
   }
   .pipe__device::before,
   .pipe__device::after {
@@ -100,17 +100,17 @@ const d = t.diagram;
     opacity: 0.6;
   }
   .pipe__times {
-    color: var(--cinnabar);
+    color: var(--celadon);
   }
   .pipe__files {
     display: grid;
     gap: 2px;
     font-size: 0.75rem;
-    color: var(--bone-dim);
+    color: var(--fg-dim);
   }
   .pipe__sub {
     font-size: var(--t-small);
-    color: var(--bone-faint);
+    color: var(--fg-faint);
   }
   .pipe__inner {
     display: flex;
@@ -119,7 +119,7 @@ const d = t.diagram;
     margin-top: 6px;
     padding: 12px 14px;
     border: 1px solid var(--line);
-    border-left: 2px solid var(--cinnabar);
+    border-left: 2px solid var(--celadon);
   }
   .pipe__label {
     font-family: var(--f-display);
@@ -141,12 +141,12 @@ const d = t.diagram;
   .pipe__line {
     width: 100%;
     height: 2px;
-    background-image: repeating-linear-gradient(90deg, var(--cinnabar) 0 3px, transparent 3px 14px);
+    background-image: repeating-linear-gradient(90deg, var(--celadon) 0 3px, transparent 3px 14px);
     background-size: 28px 2px;
     animation: pipe-flow 1.1s linear infinite;
   }
   .pipe__conn--out .pipe__line {
-    background-image: repeating-linear-gradient(90deg, var(--bone) 0 3px, transparent 3px 14px);
+    background-image: repeating-linear-gradient(90deg, var(--fg) 0 3px, transparent 3px 14px);
   }
   @keyframes pipe-flow {
     to {
@@ -155,7 +155,7 @@ const d = t.diagram;
   }
   .pipe__api {
     font-size: 0.6875rem;
-    color: var(--bone-dim);
+    color: var(--fg-dim);
     text-align: center;
     word-break: break-all;
   }
@@ -173,7 +173,7 @@ const d = t.diagram;
     position: relative;
     width: 34px;
     height: 34px;
-    border: 1.5px solid var(--bone);
+    border: 1.5px solid var(--fg);
     border-radius: 50%;
     mask: conic-gradient(from 12deg, transparent 0 24deg, #000 24deg);
     animation: dial 12s linear infinite;
@@ -198,7 +198,7 @@ const d = t.diagram;
     left: 50%;
     transform: translateX(-50%);
     white-space: nowrap;
-    color: var(--brass);
+    color: var(--rule);
   }
   .pipe__readers {
     gap: 10px;
@@ -234,7 +234,7 @@ const d = t.diagram;
     font-weight: 400;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--bone-faint);
+    color: var(--fg-faint);
     padding-top: 0;
   }
   .surfaces tbody th {
@@ -252,7 +252,7 @@ const d = t.diagram;
     font-size: 1.1rem;
   }
   .surfaces td {
-    color: var(--bone-dim);
+    color: var(--fg-dim);
   }
   .surfaces .surfaces__hub {
     text-align: right;
@@ -281,7 +281,7 @@ const d = t.diagram;
   }
   .dest p {
     font-size: var(--t-small);
-    color: var(--bone-dim);
+    color: var(--fg-dim);
   }
 
   @media (max-width: 1000px) {
@@ -298,12 +298,12 @@ const d = t.diagram;
     .pipe__line {
       width: 2px;
       height: 100%;
-      background-image: repeating-linear-gradient(180deg, var(--cinnabar) 0 3px, transparent 3px 14px);
+      background-image: repeating-linear-gradient(180deg, var(--celadon) 0 3px, transparent 3px 14px);
       background-size: 2px 28px;
       animation-name: pipe-flow-v;
     }
     .pipe__conn--out .pipe__line {
-      background-image: repeating-linear-gradient(180deg, var(--bone) 0 3px, transparent 3px 14px);
+      background-image: repeating-linear-gradient(180deg, var(--fg) 0 3px, transparent 3px 14px);
     }
     .pipe__api {
       text-align: left;
@@ -362,7 +362,7 @@ const d = t.diagram;
     }
     .surfaces td.surfaces__hub::before {
       content: attr(data-k) ' · ';
-      color: var(--bone-faint);
+      color: var(--fg-faint);
     }
   }
 </style>

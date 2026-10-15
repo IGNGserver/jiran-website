@@ -20,7 +20,7 @@ Worktree: `~/项目/.wt/计然-site/<slug>`
 
 - Astro 7（纯静态输出 `dist/`）+ TypeScript；首屏实时场景用 three.js（懒加载），其余交互为原生脚本；
 - 包管理 pnpm（`packageManager` 已锁定），Node.js ≥ 22.13；字体全部自托管（`@fontsource`）；
-- 视觉与设计源资产（Blender 脚本 / .blend / 共享几何 spec）的说明见 `design/DESIGN.md`；
+- 视觉与设计源资产（共享几何 spec `design/kelou.json`、静帧与图片生成脚本）的说明见 `design/DESIGN.md`；
 - 页面结构、语言策略与内容来源见 `docs/SITE.md`。
 
 **构建不在项目卷上跑**（设备级规范第 5c 节）：`node_modules`、`dist/`、`.astro/`、Playwright 浏览器一律放在

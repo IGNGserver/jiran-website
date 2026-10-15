@@ -52,7 +52,7 @@ const other: Lang = lang === 'zh' ? 'en' : 'zh';
     border-bottom: 1px solid transparent;
   }
   .nav.is-solid {
-    background: rgb(9 9 10 / 0.72);
+    background: rgb(242 237 227 / 0.8);
     backdrop-filter: blur(14px) saturate(1.2);
     -webkit-backdrop-filter: blur(14px) saturate(1.2);
     border-color: var(--line);
@@ -99,18 +99,18 @@ const other: Lang = lang === 'zh' ? 'en' : 'zh';
     gap: 6px;
     padding: 6px 4px;
     font-size: var(--t-small);
-    color: var(--bone-dim);
+    color: var(--fg-dim);
     text-decoration: none;
   }
   .nav__numeral {
     font-family: var(--f-display);
     font-size: 0.95rem;
-    color: var(--bone-faint);
+    color: var(--fg-faint);
     transition: color 0.3s;
   }
   .nav__index a:hover,
   .nav__index a.is-active {
-    color: var(--bone);
+    color: var(--fg);
   }
   .nav__index a.is-active .nav__numeral {
     color: var(--cinnabar);
@@ -129,13 +129,13 @@ const other: Lang = lang === 'zh' ? 'en' : 'zh';
     height: 36px;
     padding: 0 10px;
     font-size: var(--t-small);
-    color: var(--bone-dim);
+    color: var(--fg-dim);
     text-decoration: none;
     border-radius: 999px;
   }
   .nav__lang:hover,
   .nav__gh:hover {
-    color: var(--bone);
+    color: var(--fg);
   }
   .nav__dl {
     display: inline-flex;
@@ -151,9 +151,9 @@ const other: Lang = lang === 'zh' ? 'en' : 'zh';
     transition: background 0.3s, color 0.3s, border-color 0.3s;
   }
   .nav__dl:hover {
-    background: var(--bone);
-    color: var(--ink);
-    border-color: var(--bone);
+    background: var(--fg);
+    color: var(--bg);
+    border-color: var(--fg);
   }
   .nav__progress {
     position: absolute;

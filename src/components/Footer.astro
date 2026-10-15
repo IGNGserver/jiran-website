@@ -46,7 +46,7 @@ const docs = [
 <style>
   .foot {
     position: relative;
-    background: var(--ink);
+    background: var(--bg);
     border-top: 1px solid var(--line);
     padding-top: clamp(72px, 10vw, 140px);
   }
@@ -68,7 +68,7 @@ const docs = [
   }
   .foot__tag {
     margin-top: 18px;
-    color: var(--bone-dim);
+    color: var(--fg-dim);
     font-size: var(--t-lead);
   }
   .foot__col h2 {
@@ -80,10 +80,10 @@ const docs = [
   }
   .foot__col a {
     text-decoration: none;
-    color: var(--bone-dim);
+    color: var(--fg-dim);
   }
   .foot__col a:hover {
-    color: var(--bone);
+    color: var(--fg);
   }
   .foot__base {
     display: flex;
@@ -103,7 +103,7 @@ const docs = [
     height: 1px;
     background: var(--line);
     font-size: var(--t-small);
-    color: var(--bone-faint);
+    color: var(--fg-faint);
   }
   @media (max-width: 760px) {
     .foot__grid {

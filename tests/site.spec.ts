@@ -65,6 +65,13 @@ test('减少动态时不启动 WebGL，保留静帧', async ({ browser }) => {
   await ctx.close();
 });
 
+test('静帧模式：同一场景渲染出 PNG（design/tools/stills.mjs 依赖它）', async ({ page }) => {
+  await page.goto('/?still=wide&t=41.3&w=480&h=252');
+  await page.waitForFunction(() => (window as Window & { __heroStill?: string }).__heroStill?.startsWith('data:image/png'), null, {
+    timeout: 30_000,
+  });
+});
+
 test('来源筛选：会话明细只剩 5 个高亮', async ({ page }) => {
   await page.goto('/');
   await page.locator('[data-filter="s"]').click();

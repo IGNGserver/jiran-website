@@ -101,7 +101,7 @@ const tabValues = ['1.82M', '2.40M', '9.61M', '38.1M', '412M'];
     font-family: var(--f-display);
     font-size: clamp(3rem, 6vw, 5.2rem);
     line-height: 1;
-    color: var(--cinnabar);
+    color: var(--dai);
     white-space: nowrap;
   }
   .rule__glyph--mono {
@@ -120,7 +120,7 @@ const tabValues = ['1.82M', '2.40M', '9.61M', '38.1M', '412M'];
     font-weight: 600;
   }
   .rule__text p {
-    color: var(--bone-dim);
+    color: var(--fg-dim);
     font-size: 0.9375rem;
     max-width: 38em;
   }
@@ -131,7 +131,7 @@ const tabValues = ['1.82M', '2.40M', '9.61M', '38.1M', '412M'];
     gap: 14px 28px;
     padding: 20px 22px;
     border: 1px solid var(--line);
-    background: var(--ink-2);
+    background: var(--bg-2);
     min-height: 112px;
   }
   .rule__demo > div,
@@ -142,19 +142,19 @@ const tabValues = ['1.82M', '2.40M', '9.61M', '38.1M', '412M'];
   }
   .demo-big {
     font-size: clamp(1.3rem, 2vw, 1.7rem);
-    color: var(--bone);
+    color: var(--fg);
     letter-spacing: -0.02em;
   }
   .demo-big small {
     font-size: 0.55em;
-    color: var(--bone-faint);
+    color: var(--fg-faint);
     letter-spacing: 0.04em;
   }
   .demo-est {
-    color: var(--bone-dim);
+    color: var(--fg-dim);
   }
   .demo-cr {
-    color: var(--jade);
+    color: var(--celadon);
   }
   .demo-sep {
     font-family: var(--f-mono);
@@ -178,7 +178,7 @@ const tabValues = ['1.82M', '2.40M', '9.61M', '38.1M', '412M'];
     transition: color 0.3s;
   }
   .demo-hold.is-held .demo-hold__value {
-    color: var(--bone-dim);
+    color: var(--fg-dim);
   }
   .demo-hold__state {
     display: inline-flex;
@@ -189,12 +189,12 @@ const tabValues = ['1.82M', '2.40M', '9.61M', '38.1M', '412M'];
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: var(--jade);
-    box-shadow: 0 0 0 3px rgb(143 199 178 / 0.15);
+    background: var(--celadon);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--celadon) 18%, transparent);
   }
   .demo-hold.is-held .demo-hold__state i {
-    background: var(--brass);
-    box-shadow: 0 0 0 3px rgb(184 149 90 / 0.15);
+    background: var(--rule);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--rule) 18%, transparent);
   }
 
   /* 标签页归属 */
@@ -213,18 +213,18 @@ const tabValues = ['1.82M', '2.40M', '9.61M', '38.1M', '412M'];
     border-radius: 999px;
     background: none;
     font-size: var(--t-small);
-    color: var(--bone-dim);
+    color: var(--fg-dim);
     cursor: pointer;
     transition: all 0.25s;
   }
   .demo-tabs__bar button:hover {
-    color: var(--bone);
+    color: var(--fg);
     border-color: var(--line-2);
   }
   .demo-tabs__bar button[aria-selected='true'] {
-    background: var(--bone);
-    border-color: var(--bone);
-    color: var(--ink);
+    background: var(--fg);
+    border-color: var(--fg);
+    color: var(--bg);
   }
   .demo-tabs__panel {
     display: flex;
@@ -256,18 +256,18 @@ const tabValues = ['1.82M', '2.40M', '9.61M', '38.1M', '412M'];
     width: 7px;
     height: 7px;
     border-radius: 50%;
-    background: var(--jade);
+    background: var(--celadon);
     transition: background 0.5s;
   }
   .demo-stale li.is-stale {
-    color: var(--bone-faint);
+    color: var(--fg-faint);
   }
   .demo-stale li.is-stale i {
-    background: var(--bone-faint);
+    background: var(--fg-faint);
   }
   .demo-stale__age {
     font-size: 0.8125rem;
-    color: var(--bone-dim);
+    color: var(--fg-dim);
   }
   .demo-stale li.is-stale .demo-stale__age {
     color: var(--cinnabar);

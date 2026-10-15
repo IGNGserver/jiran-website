@@ -26,7 +26,7 @@ AI 工具的可引用入口。站点与产品仓库分离：
 | 技术栈 | Astro 7 静态输出 + TypeScript；首屏 three.js（懒加载）；pnpm；字体自托管 |
 | 页面结构 | 单页长卷：首屏 + 七章（名 / 问 / 则 / 汇 / 界 / 源 / 取），章节锚点 `#name` `#questions` `#rules` `#flow` `#privacy` `#sources` `#install` |
 | 语言 | 简体中文为默认（`/`），英文 `/en/`；两份文案在 `src/i18n/content.ts`，测试保证结构一致；`hreflang` 互指 |
-| 视觉方向 | 「算仪」：墨、骨白、朱砂、黄铜；标识沿用产品图标的开口刻度环几何。详见 `design/DESIGN.md` |
+| 视觉方向 | 「刻漏」（2026-10-15 取代「算仪」）：宣纸底、墨字、青瓷器物与水，朱砂只作印；主标语「点滴有数」；标识沿用产品图标的开口刻度环几何。详见 `design/DESIGN.md` |
 | 下载入口 | 构建时读取最新的非 prerelease 发布并烘焙直链；浏览器端再向 GitHub 刷新一次；失败退回 Releases 页面 |
 | 隐私 | 无统计脚本、无 Cookie；唯一外部请求是 GitHub API（读版本号） |
 

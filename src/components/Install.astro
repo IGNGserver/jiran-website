@@ -92,7 +92,7 @@ const mb = (n: number) => `${(n / 1048576).toFixed(n > 10485760 ? 0 : 1)} MB`;
   .dl {
     margin-top: clamp(48px, 6vw, 80px);
     border: 1px solid var(--line-2);
-    background: var(--ink-2);
+    background: var(--bg-2);
   }
   .dl__head {
     display: flex;
@@ -114,7 +114,7 @@ const mb = (n: number) => `${(n / 1048576).toFixed(n > 10485760 ? 0 : 1)} MB`;
     text-decoration: none;
   }
   .dl__detected {
-    color: var(--jade);
+    color: var(--celadon);
   }
   .dl__tabs {
     display: flex;
@@ -129,17 +129,17 @@ const mb = (n: number) => `${(n / 1048576).toFixed(n > 10485760 ? 0 : 1)} MB`;
     border-right: 1px solid var(--line);
     background: none;
     font-size: 0.9375rem;
-    color: var(--bone-dim);
+    color: var(--fg-dim);
     cursor: pointer;
     position: relative;
     transition: color 0.25s, background 0.25s;
   }
   .dl__tabs button:hover {
-    color: var(--bone);
+    color: var(--fg);
   }
   .dl__tabs button[aria-selected='true'] {
-    color: var(--bone);
-    background: var(--ink-3);
+    color: var(--fg);
+    background: var(--bg-3);
   }
   .dl__tabs button[aria-selected='true']::after {
     content: '';
@@ -152,7 +152,7 @@ const mb = (n: number) => `${(n / 1048576).toFixed(n > 10485760 ? 0 : 1)} MB`;
     padding: 26px;
   }
   .dl__req {
-    color: var(--bone-dim);
+    color: var(--fg-dim);
     font-size: 0.9375rem;
     margin-bottom: 18px;
   }
@@ -173,8 +173,8 @@ const mb = (n: number) => `${(n / 1048576).toFixed(n > 10485760 ? 0 : 1)} MB`;
     transition: border-color 0.25s, background 0.25s;
   }
   .dl__asset:hover {
-    border-color: var(--bone);
-    background: var(--ink-3);
+    border-color: var(--fg);
+    background: var(--bg-3);
   }
   .dl__asset-label {
     font-size: 1.0625rem;
@@ -182,14 +182,14 @@ const mb = (n: number) => `${(n / 1048576).toFixed(n > 10485760 ? 0 : 1)} MB`;
   .dl__asset-name {
     grid-row: 2;
     font-size: 0.75rem;
-    color: var(--bone-faint);
+    color: var(--fg-faint);
     overflow-wrap: anywhere;
   }
   .dl__asset-size {
     grid-column: 2;
     grid-row: 2;
     font-size: 0.75rem;
-    color: var(--bone-faint);
+    color: var(--fg-faint);
     text-align: right;
   }
   .dl__asset svg {
@@ -205,7 +205,7 @@ const mb = (n: number) => `${(n / 1048576).toFixed(n > 10485760 ? 0 : 1)} MB`;
     padding: 16px 26px;
     border-top: 1px solid var(--line);
     font-size: var(--t-small);
-    color: var(--bone-dim);
+    color: var(--fg-dim);
   }
 
   .hub {
@@ -225,7 +225,7 @@ const mb = (n: number) => `${(n / 1048576).toFixed(n > 10485760 ? 0 : 1)} MB`;
     font-weight: 600;
   }
   .hub__text p {
-    color: var(--bone-dim);
+    color: var(--fg-dim);
     margin-bottom: 16px;
   }
   .hub__text a {
@@ -234,7 +234,7 @@ const mb = (n: number) => `${(n / 1048576).toFixed(n > 10485760 ? 0 : 1)} MB`;
   .code {
     position: relative;
     border: 1px solid var(--line);
-    background: var(--ink-2);
+    background: var(--bg-2);
   }
   .code pre {
     margin: 0;
@@ -243,7 +243,7 @@ const mb = (n: number) => `${(n / 1048576).toFixed(n > 10485760 ? 0 : 1)} MB`;
     font-family: var(--f-mono);
     font-size: 0.8125rem;
     line-height: 1.8;
-    color: var(--bone);
+    color: var(--fg);
   }
   .code__copy {
     position: absolute;
@@ -252,15 +252,15 @@ const mb = (n: number) => `${(n / 1048576).toFixed(n > 10485760 ? 0 : 1)} MB`;
     padding: 5px 10px;
     border: 1px solid var(--line-2);
     border-radius: 999px;
-    background: var(--ink);
+    background: var(--bg);
     font-size: 0.6875rem;
     letter-spacing: 0.08em;
-    color: var(--bone-dim);
+    color: var(--fg-dim);
     cursor: pointer;
   }
   .code__copy:hover {
-    color: var(--bone);
-    border-color: var(--bone);
+    color: var(--fg);
+    border-color: var(--fg);
   }
   .install__tested {
     margin-top: clamp(40px, 5vw, 64px);
