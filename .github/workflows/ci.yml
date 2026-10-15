@@ -3,6 +3,7 @@ name: Jiran website checks
 on:
   push:
   pull_request:
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -37,3 +38,60 @@ jobs:
         uses: gitleaks/gitleaks-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # 站点构建与端到端检查：只在 PR / 手动触发时运行（设备级规范第 5c 节：重活只在 PR 上）。
+  # 不用工作流级 paths 过滤——verify 是必需检查，整条工作流被过滤会让 PR 一直等待；
+  # 改为在作业内判断改动范围，未涉及站点文件时跳过后续步骤。
+  site:
+    name: site
+    if: github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Detect site changes
+        id: changes
+        run: |
+          if [ "${{ github.event_name }}" != "pull_request" ]; then echo "site=true" >> "$GITHUB_OUTPUT"; exit 0; fi
+          files=$(git diff --name-only "origin/${{ github.base_ref }}...HEAD")
+          echo "$files"
+          if echo "$files" | grep -qE '^(src/|public/|design/instrument\.json|tests/|package\.json|pnpm-lock\.yaml|astro\.config\.mjs|tsconfig\.json|playwright\.config\.ts|\.github/workflows/)'; then
+            echo "site=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "site=false" >> "$GITHUB_OUTPUT"
+          fi
+      - name: Set up pnpm
+        if: steps.changes.outputs.site == 'true'
+        uses: pnpm/action-setup@v4
+      - name: Set up Node.js
+        if: steps.changes.outputs.site == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - name: Install dependencies
+        if: steps.changes.outputs.site == 'true'
+        run: pnpm install --frozen-lockfile
+      - name: Cache Playwright browsers
+        if: steps.changes.outputs.site == 'true'
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+      - name: Install Chromium
+        if: steps.changes.outputs.site == 'true'
+        run: pnpm exec playwright install --with-deps chromium
+      - name: Build (astro check + astro build)
+        if: steps.changes.outputs.site == 'true'
+        run: pnpm build
+        env:
+          ASTRO_TELEMETRY_DISABLED: '1'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: End-to-end tests
+        if: steps.changes.outputs.site == 'true'
+        run: pnpm test
+        env:
+          ASTRO_TELEMETRY_DISABLED: '1'
