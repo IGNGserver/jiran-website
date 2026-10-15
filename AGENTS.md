@@ -48,4 +48,4 @@ Worktree: `~/项目/.wt/计然-site/<slug>`
 
 - 开发位置：NAS 共享卷 `~/项目`；仓库锚点 `~/项目/项目网站/计然-site`，任务 worktree 在 `~/项目/.wt/计然-site/<slug>`。
 - 本地构建：ubuntu-dev 根盘低于 20G 闸门，只能走 CI；macos-dev / macOS-dev2 可在 `~/.build` 本地构建。
-- 生产目标：Cloudflare 边缘网络（账号与 zone 已具备，站点项目与域名未定；不写凭据）。
+- 生产目标：Cloudflare Pages Direct Upload 项目 `jiran-website`；当前公开地址为 `https://jiran-website.pages.dev/`，正式自定义域名与自动发布流程未定；不写凭据。
