@@ -46,7 +46,8 @@
 | 构建命令记录 | `pnpm build` |
 | 构建输出记录 | `dist/` |
 | 默认公开地址 | `https://jiran-website.pages.dev/`（Cloudflare 别名，保留） |
-| 自定义域名 | `https://jiran.igng.net/`（2026-10-17 绑定） |
+| 自定义域名 | `https://jiran.igng.net/`（2026-10-17 绑定，状态 active） |
+| 当前生产部署 | `de76d1f8-30f4-4405-be63-b8244034956d`（提交 `11e5a2a`，2026-10-17 发布，canonical / hreflang / og:image 已指向正式域名） |
 | DNS 记录 | proxied CNAME `jiran.igng.net` → `jiran-website.pages.dev`，zone `igng.net`（zone id `d3f06d3e7ef8cccf99e93ce9c4ea4f44`，record id `5948b8aaffb617d229b0d699da9615aa`） |
 
 Direct Upload 不由 Cloudflare 重新执行仓库构建；真正上传的是 GitHub Actions 生成的 `dist/`。当前 CI 仅在手动触发 `main` 工作流时保留一个 1 天的构建 artifact，未配置长期 Cloudflare API 凭据或自动生产发布工作流。
@@ -66,6 +67,8 @@ Direct Upload 不由 Cloudflare 重新执行仓库构建；真正上传的是 Gi
 ## 发布与回滚
 
 - 生产发布：在 GitHub Actions 手动触发 `Jiran website checks` 的 `main` 工作流，下载 `site-dist-<commit-sha>` artifact，再通过 Cloudflare Pages Direct Upload 发布；构建与 artifact 只能放在 CI 或本机 scratch，不得写回项目卷；
+- 发布命令（在 artifact 解包目录上执行；自定义域名绑定在项目上，因此每次发布都直接服务 `https://jiran.igng.net/`）：
+  `npx wrangler pages deploy dist --project-name jiran-website --branch main`；凭据只以环境变量 `CLOUDFLARE_API_TOKEN` / `CLOUDFLARE_ACCOUNT_ID` 注入（账号 `d08c9ec0a1765b7040866053cec24e8b`），不得写进仓库或 CI 长期 Secrets；
 - 正式入口：<https://jiran.igng.net/>；默认别名 <https://jiran-website.pages.dev/> 仍然可访问；
 - 回滚：在 Cloudflare Pages 项目中选择上一成功部署版本恢复。发布前记录部署 ID 与对应的 `main` 提交；
 - 域名变更：修改 DNS 前记录原值，回滚即恢复原记录；当前记录是 proxied CNAME `jiran.igng.net` → `jiran-website.pages.dev`，改动必须同步 Pages 自定义域名与三处 `SITE_URL`。
