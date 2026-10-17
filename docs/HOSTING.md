@@ -54,8 +54,16 @@ Direct Upload 不由 Cloudflare 重新执行仓库构建；真正上传的是 Gi
 
 ## 搜索收录
 
-- Google Search Console：无需为本子域单独验证，域名资源 `sc-domain:igng.net`（`siteFullUser`）已覆盖；sitemap 依赖 `public/robots.txt` 的 `Sitemap:` 行被发现；`public/sitemap.xml` 是**手工维护**的（项目未装 sitemap 集成，站点只有 `/` 与 `/en/`），新增页面必须同步补这个文件，GSC 控制台的手动提交需在 UI 完成（公开 API 已不提供 `sitemaps.submit`）。
-- Bing Webmaster Tools：站点 `https://jiran.igng.net/` 已登记，所有权用首页 `<meta name="msvalidate.01" content="B411826ACAE5C5CD20EA5574C3F8A6E4">` 验证；验证后需提交 `https://jiran.igng.net/sitemap.xml` 与首页 URL。
+- Bing Webmaster Tools：站点 `https://jiran.igng.net/` **已验证所有权**（2026-10-17），方式是首页
+  `<meta name="msvalidate.01" content="B411826ACAE5C5CD20EA5574C3F8A6E4">`；该值是账号级 auth code，与
+  其它 `*.igng.net` 站点相同，**删掉这条 meta 会让 Bing 失去所有权记录**。已提交
+  `https://jiran.igng.net/sitemap.xml`（抓取状态 Success，2 条 URL）以及 `/` 与 `/en/`。
+- Google Search Console：无需为本子域单独验证，域名资源 `sc-domain:igng.net`（权限 `siteFullUser`）已覆盖。
+  2026-10-17 用 URL Inspection 查询 `/`、`/en/` 均为 `URL is unknown to Google`，属新建域名的正常状态；
+  Google 需要先抓 `public/robots.txt` 的 `Sitemap:` 行才会发现 `public/sitemap.xml`。
+- GSC 的 sitemap 提交与 Request Indexing 只能在控制台 UI 做：公开 API 的 `sitemaps.submit` 已下线
+  （`GET .../sitemaps` 仍可读，`PUT .../feedpath/...` 一律 404）。
+- `public/sitemap.xml` 是**手工维护**的（项目没有 sitemap 集成，站点只有 `/` 与 `/en/`），新增页面必须同步补。
 
 ## 上线检查清单
 
