@@ -54,7 +54,7 @@ Direct Upload 不由 Cloudflare 重新执行仓库构建；真正上传的是 Gi
 
 ## 搜索收录
 
-- Google Search Console：无需为本子域单独验证，域名资源 `sc-domain:igng.net`（`siteFullUser`）已覆盖；sitemap 依赖 `public/robots.txt` 的 `Sitemap:` 行被发现，GSC 控制台的手动提交需在 UI 完成（公开 API 已不提供 `sitemaps.submit`）。
+- Google Search Console：无需为本子域单独验证，域名资源 `sc-domain:igng.net`（`siteFullUser`）已覆盖；sitemap 依赖 `public/robots.txt` 的 `Sitemap:` 行被发现；`public/sitemap.xml` 是**手工维护**的（项目未装 sitemap 集成，站点只有 `/` 与 `/en/`），新增页面必须同步补这个文件，GSC 控制台的手动提交需在 UI 完成（公开 API 已不提供 `sitemaps.submit`）。
 - Bing Webmaster Tools：站点 `https://jiran.igng.net/` 已登记，所有权用首页 `<meta name="msvalidate.01" content="B411826ACAE5C5CD20EA5574C3F8A6E4">` 验证；验证后需提交 `https://jiran.igng.net/sitemap.xml` 与首页 URL。
 
 ## 上线检查清单
