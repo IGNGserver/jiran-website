@@ -15,8 +15,8 @@ AI 工具的可引用入口。站点与产品仓库分离：
 ## 当前状态（2026-10-15）
 
 - 首版站点已实现：中文首页 `/`、英文首页 `/en/`、`404`；静态输出；
-- 已部署到 Cloudflare Pages Direct Upload，当前公开地址为 `https://jiran-website.pages.dev/`；
-- 当前只有 Cloudflare 默认 `pages.dev` 地址，尚未绑定正式自定义域名；
+- 已部署到 Cloudflare Pages Direct Upload，正式地址为 `https://jiran.igng.net/`；
+- Pages 项目已绑定自定义域名 `jiran.igng.net`，Cloudflare 默认 `pages.dev` 地址保留为别名；
 - 生产发布暂由 GitHub Actions 手动构建并上传，不随 `main` 合并自动发生（见 `docs/HOSTING.md`）。
 
 ## 已定案
@@ -32,7 +32,7 @@ AI 工具的可引用入口。站点与产品仓库分离：
 
 ## 待办 / 已知问题
 
-- [ ] 选定正式自定义域名并将 `SITE_URL` 从当前 `pages.dev` 地址切换到正式地址，见 `docs/HOSTING.md`；
+- [x] 正式自定义域名 `jiran.igng.net` 已绑定，`SITE_URL` 已从 `pages.dev` 切换到正式地址，见 `docs/HOSTING.md`；
 - [ ] 为 Direct Upload 配置受控的持续发布流程，或明确继续使用手动生产发布；
 - [ ] APT 安装片段暂不展示：产品 README 中的 `igngserver.github.io/jiran/apt` 在仓库改名后 404，
       且已发布的 `jiran.sources` 仍指向旧地址（2026-10-15 实测；新地址 `/jiran-monitor/apt` 可用）。

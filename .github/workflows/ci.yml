@@ -90,8 +90,8 @@ jobs:
         env:
           ASTRO_TELEMETRY_DISABLED: '1'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # Current Cloudflare Pages default hostname; replace when a custom domain is selected.
-          SITE_URL: https://jiran-website.pages.dev/
+          # Official domain (docs/HOSTING.md); baked into canonical / hreflang / og:image.
+          SITE_URL: https://jiran.igng.net/
       - name: End-to-end tests
         if: steps.changes.outputs.site == 'true'
         run: pnpm test
