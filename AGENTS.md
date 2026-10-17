@@ -42,10 +42,10 @@ Worktree: `~/项目/.wt/计然-site/<slug>`
 - 站点文案引用产品事实（功能、平台、版本）时必须与产品仓库当前 `README.md` / Release 对齐，不得编造未发布能力。
   事实集中在 `src/data/product.ts`（含核对基线 commit），文案在 `src/i18n/content.ts`；演示用数字必须标注「示意 / ~」。
 - 版本号与下载直链不写死：构建时读取 GitHub 上最新的非 prerelease 发布，客户端再刷新一次；失败时退回 Releases 页面。
-- 域名与 Cloudflare 项目名在 `docs/HOSTING.md` 记录；未定案前不得把猜测值写入代码或文档结论。
+- 正式域名 `https://jiran.igng.net/`，Cloudflare Pages 项目 `jiran-website`；域名或项目名变更要在 `docs/HOSTING.md` 登记，并同步 CI 的 `SITE_URL` 与 `astro.config.mjs` 缺省值。
 
 ## 环境事实
 
 - 开发位置：NAS 共享卷 `~/项目`；仓库锚点 `~/项目/项目网站/计然-site`，任务 worktree 在 `~/项目/.wt/计然-site/<slug>`。
 - 本地构建：ubuntu-dev 根盘低于 20G 闸门，只能走 CI；macos-dev / macOS-dev2 可在 `~/.build` 本地构建。
-- 生产目标：Cloudflare Pages Direct Upload 项目 `jiran-website`；当前公开地址为 `https://jiran-website.pages.dev/`，正式自定义域名与自动发布流程未定；不写凭据。
+- 生产目标：Cloudflare Pages Direct Upload 项目 `jiran-website`，正式域名 `https://jiran.igng.net/`；自定义域名绑定在项目上，之后的每次部署都自动服务该域名，`https://jiran-website.pages.dev/` 只作 Cloudflare 默认别名保留；自动发布流程未启用，不写凭据。
