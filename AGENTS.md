@@ -48,4 +48,5 @@ Worktree: `~/项目/.wt/计然-site/<slug>`
 
 - 开发位置：NAS 共享卷 `~/项目`；仓库锚点 `~/项目/项目网站/计然-site`，任务 worktree 在 `~/项目/.wt/计然-site/<slug>`。
 - 本地构建：ubuntu-dev 根盘低于 20G 闸门，只能走 CI；macos-dev / macOS-dev2 可在 `~/.build` 本地构建。
+- 搜索收录：Google 走已验证的域名资源 `sc-domain:igng.net`（子域无需单独验证，`robots.txt` 的 Sitemap 行是发现入口）；Bing 走首页的 `msvalidate.01` meta 验证，**删掉该 meta 会让 Bing 站点失去所有权**。
 - 生产目标：Cloudflare Pages Direct Upload 项目 `jiran-website`，正式域名 `https://jiran.igng.net/`；自定义域名绑定在项目上，之后的每次部署都自动服务该域名，`https://jiran-website.pages.dev/` 只作 Cloudflare 默认别名保留；自动发布流程未启用，不写凭据。

@@ -52,6 +52,11 @@
 
 Direct Upload 不由 Cloudflare 重新执行仓库构建；真正上传的是 GitHub Actions 生成的 `dist/`。当前 CI 仅在手动触发 `main` 工作流时保留一个 1 天的构建 artifact，未配置长期 Cloudflare API 凭据或自动生产发布工作流。
 
+## 搜索收录
+
+- Google Search Console：无需为本子域单独验证，域名资源 `sc-domain:igng.net`（`siteFullUser`）已覆盖；sitemap 依赖 `public/robots.txt` 的 `Sitemap:` 行被发现，GSC 控制台的手动提交需在 UI 完成（公开 API 已不提供 `sitemaps.submit`）。
+- Bing Webmaster Tools：站点 `https://jiran.igng.net/` 已登记，所有权用首页 `<meta name="msvalidate.01" content="B411826ACAE5C5CD20EA5574C3F8A6E4">` 验证；验证后需提交 `https://jiran.igng.net/sitemap.xml` 与首页 URL。
+
 ## 上线检查清单
 
 - [x] 前端技术栈与构建命令定案，登记到 `AGENTS.md` 并接入 CI（2026-10-15）；
