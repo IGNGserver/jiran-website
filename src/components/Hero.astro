@@ -525,8 +525,13 @@ const tools = TOOLS.map((x) => ({ n: x.name, c: [x.u, x.l, x.s] }));
           });
         })
         .catch((err) => console.warn('[hero] WebGL scene unavailable, keeping the still', err));
-    // 让首帧文字与静帧先上屏，再加载 three
-    if ('requestIdleCallback' in window) (window as Window).requestIdleCallback(boot, { timeout: 1200 });
-    else setTimeout(boot, 300);
+    // 让首帧文字、静帧与字体先加载完（load 之后、空闲时）再加载 three（约 140KB gzip），避免与首屏资源抢带宽。
+    // 与 scripts/release.ts 的同名逻辑各写一份：抽成共享模块会多出一个串行请求，拖慢本脚本执行
+    const idle = () => {
+      if ('requestIdleCallback' in window) (window as Window).requestIdleCallback(boot, { timeout: 1200 });
+      else setTimeout(boot, 300);
+    };
+    if (document.readyState === 'complete') idle();
+    else window.addEventListener('load', idle, { once: true });
   }
 </script>

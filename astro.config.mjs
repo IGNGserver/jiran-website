@@ -9,7 +9,8 @@ export default defineConfig({
   site,
   output: 'static',
   trailingSlash: 'always',
-  build: { format: 'directory', inlineStylesheets: 'never' },
+  // 样式表内联进 HTML：省掉首屏前的渲染阻塞请求（全站只有两页，跨页缓存样式的收益很小）
+  build: { format: 'directory', inlineStylesheets: 'always' },
   devToolbar: { enabled: false },
   vite: {
     build: { assetsInlineLimit: 2048 },
