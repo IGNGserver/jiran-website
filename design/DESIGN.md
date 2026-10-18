@@ -45,11 +45,30 @@ Token 是一滴一滴烧掉的，所以站点围绕一件真实存在、专门�
 | 角色 | 字体 | 说明 |
 | --- | --- | --- |
 | 展示（拉丁） | Instrument Serif | 窄而高的衬线，标题与工具名 |
-| 展示（中文） | Noto Serif SC 400/600 | 按 unicode-range 分片；首屏的竖排题跋「点滴有数」与印章、浮箭上的刻度数字也用它 |
+| 展示（中文） | Noto Serif SC 400/600 | 只收站点用到的字（见下文「中文字体子集」）；首屏的竖排题跋「点滴有数」与印章、浮箭上的刻度数字也用它 |
 | 正文 | Instrument Sans + 系统中文黑体 | |
 | 数字与标签 | JetBrains Mono | 等宽数字、零带斜杠，像仪表读数 |
 
 全部自托管（`@fontsource`），不请求第三方字体服务。中文标题使用 `word-break: keep-all`，只在标点处断行。
+
+### 中文字体子集
+
+`@fontsource/noto-serif-sc` 按 unicode-range 切成约 100 片，页面上几百个汉字会散落在 25～27 片里，
+冷加载要拉近 1MB 字体。站点因此不直接引用这些分片，而是由 `design/tools/cjk-fonts.py` 从同一批分片里
+抽出用到的字合并成子集（字形与 OpenType 特性原样保留，竖排用的 `vert` / `vrt2` 也在），产物提交进仓库：
+
+| 文件 | 内容 |
+| --- | --- |
+| `src/assets/fonts/noto-serif-sc-a-{400,600}.woff2` | 英文页与所有脚本里出现的字（两种语言都会用到） |
+| `src/assets/fonts/noto-serif-sc-b-{400,600}.woff2` | 其余只在中文页 / 404 出现的字 |
+| `src/styles/fonts-cjk.css` | 对应的 `@font-face`，`unicode-range` 精确到字，所以英文页只下载 a 档 |
+| `src/assets/fonts/noto-serif-sc.chars.json` | 每档收录的字；`tests/fonts.spec.ts` 用它检查构建产物里的字都被覆盖 |
+
+改文案引入了新字时测试会失败并列出缺字。重新生成（Python 3 + `pip install -r design/tools/requirements.txt`）：
+
+1. `pnpm build`；
+2. `pnpm fonts`（读取 `dist/` 与 `node_modules` 里锁定版本的分片，改写上面四个文件）；
+3. 再 `pnpm build`，`pnpm test` 通过后连同字体一起提交。升级 `@fontsource/noto-serif-sc` 后同样要重跑。
 
 ## 动效原则
 
@@ -71,6 +90,7 @@ Token 是一滴一滴烧掉的，所以站点围绕一件真实存在、专门�
 | `design/kelou.json` | 刻漏的几何、节奏与配色——站点场景与静帧共用的唯一定义 |
 | `design/tools/stills.mjs` | 用站点自己的首屏场景（`?still=<机位>&t=<秒>&w=&h=`）渲染静帧母版 |
 | `design/tools/media.mjs` | 由母版生成站点图片、社交卡片与 apple-touch-icon |
+| `design/tools/cjk-fonts.py` | 按站点用字生成 Noto Serif SC 子集（见「中文字体子集」） |
 | `src/assets/renders/kelou-*.webp` | 母版的高质量 WebP；构建时由 Astro 再生成多尺寸 |
 
 静帧不再用 Blender 单独建模：它们就是实时场景在固定时刻的一帧，所以永远与页面上动起来的画面一致。

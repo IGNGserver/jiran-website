@@ -8,7 +8,8 @@
     "preview": "astro preview",
     "check": "astro check",
     "test": "playwright test",
-    "media": "node design/tools/media.mjs"
+    "media": "node design/tools/media.mjs",
+    "fonts": "python3 design/tools/cjk-fonts.py dist ."
   },
   "dependencies": {
     "astro": "^7.3.8",
