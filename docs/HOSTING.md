@@ -48,7 +48,8 @@
 | 构建输出记录 | `dist/` |
 | 默认公开地址 | `https://jiran-website.pages.dev/`（Cloudflare 别名，保留） |
 | 自定义域名 | `https://jiran.igng.net/`（2026-10-17 绑定，状态 active） |
-| 当前生产部署 | `de76d1f8-30f4-4405-be63-b8244034956d`（提交 `11e5a2a`，2026-10-17 发布，canonical / hreflang / og:image 已指向正式域名） |
+| 当前生产部署 | `e254113c-79c3-49bd-883e-de616d82ef33`（提交 `7742742`，2026-10-19 发布：加载性能优化 #12～#14，字体子集、长期缓存、103 Early Hints） |
+| 回滚点 | `d1f65c46-cdba-4c03-b771-ca5bebb4e0c2`（`f73f182`，同日，无 Early Hints 的 Link 头）；优化前最后一版 `314c1269-c74d-4d76-a375-00ad9415455f`（`afceaf9`，2026-10-17） |
 | DNS 记录 | proxied CNAME `jiran.igng.net` → `jiran-website.pages.dev`，zone `igng.net`（zone id `d3f06d3e7ef8cccf99e93ce9c4ea4f44`，record id `5948b8aaffb617d229b0d699da9615aa`） |
 
 Direct Upload 不由 Cloudflare 重新执行仓库构建；真正上传的是 GitHub Actions 生成的 `dist/`。当前 CI 仅在手动触发 `main` 工作流时保留一个 1 天的构建 artifact，未配置长期 Cloudflare API 凭据或自动生产发布工作流。
@@ -84,5 +85,6 @@ Direct Upload 不由 Cloudflare 重新执行仓库构建；真正上传的是 Gi
 - 发布命令（在 artifact 解包目录上执行；自定义域名绑定在项目上，因此每次发布都直接服务 `https://jiran.igng.net/`）：
   `npx wrangler pages deploy dist --project-name jiran-website --branch main`；凭据只以环境变量 `CLOUDFLARE_API_TOKEN` / `CLOUDFLARE_ACCOUNT_ID` 注入（账号 `d08c9ec0a1765b7040866053cec24e8b`），不得写进仓库或 CI 长期 Secrets；
 - 正式入口：<https://jiran.igng.net/>；默认别名 <https://jiran-website.pages.dev/> 仍然可访问；
+- 本机没有 `CLOUDFLARE_API_TOKEN` 时（2026-10-19 的发布即如此）：经已授权的 Cloudflare API 网关取项目上传令牌（`GET /accounts/{account}/pages/projects/jiran-website/upload-token`，30 分钟有效），按 wrangler 相同的规则（`blake3(base64(内容) + 扩展名)` 取前 32 位十六进制）在本机 scratch 上传缺失资产（`/pages/assets/check-missing`、`upload`、`upsert-hashes`），再经网关 `POST .../deployments`（multipart：`manifest`、`branch=main`、`commit_hash`、`commit_message`、`_headers`）。`_headers` 必须随部署一起提交，否则缓存与 Early Hints 规则不生效；令牌不落盘、不入库；
 - 回滚：在 Cloudflare Pages 项目中选择上一成功部署版本恢复。发布前记录部署 ID 与对应的 `main` 提交；
 - 域名变更：修改 DNS 前记录原值，回滚即恢复原记录；当前记录是 proxied CNAME `jiran.igng.net` → `jiran-website.pages.dev`，改动必须同步 Pages 自定义域名与三处 `SITE_URL`。
