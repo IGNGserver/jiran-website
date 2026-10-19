@@ -37,6 +37,16 @@ function readBaked(): ReleaseInfo | null {
   }
 }
 
+/** 页面 load 之后、浏览器空闲时再执行；不支持 requestIdleCallback 的浏览器（Safari）退回短延时 */
+function afterLoad(fn: () => void) {
+  const idle = () => {
+    if ('requestIdleCallback' in window) window.requestIdleCallback(() => fn(), { timeout: 1200 });
+    else setTimeout(fn, 300);
+  };
+  if (document.readyState === 'complete') idle();
+  else window.addEventListener('load', idle, { once: true });
+}
+
 const CACHE_KEY = 'jiran-release-v1';
 async function refresh(repo: string): Promise<ReleaseInfo | null> {
   try {
@@ -100,12 +110,16 @@ export function initRelease(repo: string) {
   if (platform) document.dispatchEvent(new CustomEvent('jiran:platform', { detail: platform }));
   const baked = readBaked();
   apply(baked, platform);
-  refresh(repo)
-    .then((fresh) => {
-      if (fresh && fresh.tag !== baked?.tag) apply(fresh, platform);
-    })
-    .catch(() => {
-      /* 离线或被限流：保留构建时的版本信息 */
-    });
+  // 构建时的版本信息已经上屏；向 GitHub 刷新的响应约 1MB JSON（gzip 后 ~125KB），放到 load 之后，
+  // 不和首屏资源抢带宽、也不在首屏解析大 JSON
+  afterLoad(() =>
+    refresh(repo)
+      .then((fresh) => {
+        if (fresh && fresh.tag !== baked?.tag) apply(fresh, platform);
+      })
+      .catch(() => {
+        /* 离线或被限流：保留构建时的版本信息 */
+      }),
+  );
   return platform;
 }
