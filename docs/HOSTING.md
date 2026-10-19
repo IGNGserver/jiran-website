@@ -20,7 +20,7 @@
 | 安装 | `pnpm install --frozen-lockfile`（Node.js 22.13+，`packageManager: pnpm@10.33.0`） |
 | 构建命令 | `pnpm build`（`astro check && astro build`） |
 | 输出目录 | `dist/`（含 `404.html`，Pages 会自动作为 404 页） |
-| 响应头 | `public/_headers` 随产物发布：`/_astro/*`（文件名带内容哈希）一年 `immutable`；HTML 与其余固定文件名资源用 Pages 默认的回源校验 |
+| 响应头 | `public/_headers` 随产物发布：`/_astro/*`（文件名带内容哈希）一年 `immutable`；HTML 与其余固定文件名资源用 Pages 默认的回源校验。构建时 `src/integrations/early-hints.mjs` 再把首页字体预加载追加为 `/`、`/en/` 的 `Link` 头，供 103 Early Hints 使用（Pages 不会为带 `crossorigin` 的 `<link>` 自动生成） |
 | 当前 `SITE_URL` | `https://jiran.igng.net/`；CI、Pages 项目环境变量与 `astro.config.mjs` 缺省值三处一致，改域名必须同时改这三处 |
 | 可选环境变量 | `GITHUB_TOKEN`：构建时读取发布信息，避开匿名限流；`JIRAN_OFFLINE=1`：离线构建，下载链接退回 Releases 页面 |
 
